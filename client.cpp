@@ -32,10 +32,12 @@ int main()
     cout << "Server IP: ";
     memset(fName, 0, 256);
     cin >> fName;
-    server = gethostbyname("localhost");
+    server = gethostbyname(fName);
+    memset(fName, 0, 256);
     cout << "Port number: ";
     cin >> fName;
     portno = atoi(fName);
+    memset(fName, 0, 256);
 
     //create socket
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
