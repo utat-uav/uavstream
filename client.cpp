@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define BLOCK 1500
+#define BLOCK 1024
 
 void error(string msg){
     cerr << msg << endl;
@@ -81,9 +81,10 @@ int main()
         if(write(sockfd, buffer, BLOCK)<0)
             error("error writing block");
     }
+    memset(buffer, 0, BLOCK);
     if(read(sockfd, buffer, fSize%BLOCK)<0)
         error("error reading last block");
-    fileO.write(buffer, BLOCK);
+    fileO.write(buffer, fSize%BLOCK);
     if(write(sockfd, buffer, fSize%BLOCK)<0)
         error("error writing last block");
 

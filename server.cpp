@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define BLOCK 1500
+#define BLOCK 1024
 
 void error(string msg){
     cerr << msg << endl;
