@@ -7,6 +7,7 @@ ClientSock::ClientSock(std::string ser_name, int port_no)
     createSock();
 }
 
+//read something
 std::string ClientSock::readIn(int size){
     char buffer[size];
     read(sockFd, buffer, size);
@@ -14,6 +15,7 @@ std::string ClientSock::readIn(int size){
     return re;
 }
 
+//write something
 void ClientSock::writeOut(std::string toWrite){
     const char* c = toWrite.c_str();
     write(sockFd, c, strlen(c));
@@ -51,6 +53,7 @@ void ClientSock::resetSock(){
     createSock();
 }
 
+//generic error message TO BE REWRITTEN
 void ClientSock::error(std::string msg){
     std::cout << msg << std::endl;
     exit(1);                            //FORCE QUIT TO BE CHANGED
