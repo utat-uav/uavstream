@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -23,7 +24,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Server.h" />
+		<Unit filename="include/ServerSock.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Server.cpp" />
+		<Unit filename="src/ServerSock.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -8,5 +8,6 @@ int main()
 {
     Server* test = new Server("localhost", 5914);
     cout << "ending normally" << endl;
+    delete test;
     return 0;
 }

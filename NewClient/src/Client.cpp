@@ -8,8 +8,22 @@ Client::Client(char* ipAddress, int portNo)
 }
 
 void Client::testStuff(){
-    std::string temp = client->readIn(BLOCK);
-    std::cout << temp << std::endl;
+    bool ending = false;
+    std::string serIn;
+    while(!ending){
+        serIn = client->readIn(BLOCK);
+        if(serIn == "R"){
+            client->writeOut("RC");
+            client->resetSock();
+            std::cout << "Client reset" << std::endl;
+        }else if(serIn == "End"){
+            client->writeOut("EndC");
+            ending = true;
+        }else{
+            std::cout << serIn << std::endl;
+            client->writeOut("read");
+        }
+    }
 }
 
 Client::~Client()

@@ -21,6 +21,7 @@ class ServerSock
         //public functions
         std::string readIn(int);
         void writeOut(std::string);
+        void resetSock();
     protected:
     private:
         //private global variables
@@ -31,7 +32,6 @@ class ServerSock
 
         //private functions
         void createSock();
-        void resetSock();
         void error(std::string);
 
 };

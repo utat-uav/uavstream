@@ -10,6 +10,7 @@ ClientSock::ClientSock(std::string ser_name, int port_no)
 //read something
 std::string ClientSock::readIn(int size){
     char buffer[size];
+    memset(buffer, 0, size);
     read(sockFd, buffer, size);
     std::string re(buffer);
     return re;

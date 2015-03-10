@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1425677514 source:/home/harry/Desktop/git/uavstream/NewServer/main.cpp
+1425998846 source:/home/harry/Desktop/git/uavstream/NewServer/main.cpp
 	<iostream>
 	"Server.h"
 
@@ -10,7 +10,7 @@
 	<string>
 	<iostream>
 
-1425676657 /home/harry/Desktop/git/uavstream/NewServer/include/ServerSock.h
+1425998820 /home/harry/Desktop/git/uavstream/NewServer/include/ServerSock.h
 	<iostream>
 	<cstdlib>
 	<netdb.h>
@@ -21,6 +21,9 @@
 	<sys/types.h>
 	<unistd.h>
 
-1425677532 source:/home/harry/Desktop/git/uavstream/NewServer/src/Server.cpp
+1425999097 source:/home/harry/Desktop/git/uavstream/NewServer/src/Server.cpp
 	"Server.h"
+
+1425999538 source:/home/harry/Desktop/git/uavstream/NewServer/src/ServerSock.cpp
+	"ServerSock.h"
 
