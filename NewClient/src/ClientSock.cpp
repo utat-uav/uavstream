@@ -40,17 +40,17 @@ void ClientSock::createSock(){
     bcopy((char*)server->h_addr, (char*)&serAddr.sin_addr.s_addr, server->h_length);
     //memcpy((char*)serAddr.sin_addr.s_addr , (char*)server->h_addr, server->h_length); //NOTE: s_addr is type unsigned int. dunno how it works tho
     serAddr.sin_port = htons(portNo);
-    if(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
-        error("Error connecting");
+    while(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
+        ;//testing this
 
 }
 
 //closes current socket and opens a new one
 void ClientSock::resetSock(){
-    if(sockFd)
+    if(sockFd>=0)
         close(sockFd);
     if(server)
-        free(server);
+        ;//free(server); //???????
     createSock();
 }
 

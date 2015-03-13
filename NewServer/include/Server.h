@@ -11,7 +11,7 @@
 class Server
 {
     public:
-        Server(char*,  int);
+        Server(char*, int);
         virtual ~Server();
     protected:
     private:

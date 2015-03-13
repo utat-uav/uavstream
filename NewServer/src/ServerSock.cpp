@@ -48,9 +48,9 @@ void ServerSock::createSock(){
 
 //closes sockets and reopens them
 void ServerSock::resetSock(){
-    if(sockFd)
+    if(sockFd>=0)
         close(sockFd);
-    if(newsockFd)
+    if(newsockFd>=0)
         close(newsockFd);
     createSock();
 }
