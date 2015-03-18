@@ -21,7 +21,7 @@ class ClientSock
         //public functions
         std::string readIn(int);
         void writeOut(std::string);
-        void resetSock();
+        bool resetSock();
     protected:
     private:
         //private global variables
@@ -32,7 +32,7 @@ class ClientSock
         struct hostent* server;
 
         //private functions
-        void createSock();
+        bool createSock();
         void error(std::string);
 };
 

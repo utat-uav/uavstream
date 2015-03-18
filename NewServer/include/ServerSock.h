@@ -21,7 +21,7 @@ class ServerSock
         //public functions
         std::string readIn(int);
         void writeOut(std::string);
-        void resetSock();
+        bool resetSock();
     protected:
     private:
         //private global variables
@@ -31,7 +31,7 @@ class ServerSock
         struct sockaddr_in serAddr, cliAddr;
 
         //private functions
-        void createSock();
+        bool createSock();
         void error(std::string);
 
 };

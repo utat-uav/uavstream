@@ -23,7 +23,7 @@ void ClientSock::writeOut(std::string toWrite){
 }
 
 //opens and connects a new socket using the same ip and portno
-void ClientSock::createSock(){
+bool ClientSock::createSock(){
     //create socket
     sockFd = socket(AF_INET, SOCK_STREAM, 0);       //no clue what the constants mean
 
@@ -42,16 +42,16 @@ void ClientSock::createSock(){
     serAddr.sin_port = htons(portNo);
     while(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
         ;//testing this
-
+    return true;
 }
 
 //closes current socket and opens a new one
-void ClientSock::resetSock(){
+bool ClientSock::resetSock(){
     if(sockFd>=0)
         close(sockFd);
     if(server)
         ;//free(server); //???????
-    createSock();
+    return createSock();
 }
 
 //generic error message TO BE REWRITTEN

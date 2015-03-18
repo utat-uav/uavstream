@@ -23,7 +23,7 @@ void ServerSock::writeOut(std::string toWrite){
 }
 
 //open server socket and client socket
-void ServerSock::createSock(){
+bool ServerSock::createSock(){
     //create and test socket
     sockFd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockFd<0)
@@ -44,15 +44,17 @@ void ServerSock::createSock(){
     newsockFd = accept(sockFd, (struct sockaddr*)&cliAddr, (socklen_t*)&clilen);
     if(newsockFd<0)
         error("Error on accept");
+
+    return true;
 }
 
 //closes sockets and reopens them
-void ServerSock::resetSock(){
+bool ServerSock::resetSock(){
     if(sockFd>=0)
         close(sockFd);
     if(newsockFd>=0)
         close(newsockFd);
-    createSock();
+    return createSock();
 }
 
 //generic error TO BE REWRITTEN
