@@ -25,9 +25,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Client.h" />
+		<Unit filename="include/ClientFile.h" />
 		<Unit filename="include/ClientSock.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Client.cpp" />
+		<Unit filename="src/ClientFile.cpp" />
 		<Unit filename="src/ClientSock.cpp" />
 		<Extensions>
 			<code_completion />
