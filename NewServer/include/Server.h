@@ -11,11 +11,14 @@
 class Server
 {
     public:
-        Server(char*, int);
+        Server(int);
         virtual ~Server();
     protected:
     private:
         ServerSock* server;
+        int portNo;
+
+        void newServer();
         void testStuff();
 };
 

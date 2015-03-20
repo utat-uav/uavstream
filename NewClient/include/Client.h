@@ -6,17 +6,22 @@
 #include <fstream>
 #include <string>
 #include <iostream> //to be removed
+#include <unistd.h>
 
 #define BLOCK 2048
 
 class Client
 {
     public:
-        Client(char*, int);
+        Client(std::string, int);
         virtual ~Client();
     protected:
     private:
         ClientSock* client;
+        std::string serName;
+        int portNo;
+
+        void newClient();
         void testStuff();
 };
 

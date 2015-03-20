@@ -4,7 +4,7 @@ ClientSock::ClientSock(std::string ser_name, int port_no)
 {
     portNo = port_no;
     serName = ser_name;
-    createSock();
+    connected = createSock();
 }
 
 //read something
@@ -32,7 +32,7 @@ bool ClientSock::createSock(){
 
     //test socket and server
     if(sockFd<0||!server)
-        error("No such host");
+        return false;
 
     //connect socket to host ip and portno
     memset(&serAddr, 0, sizeof(serAddr));
@@ -40,31 +40,21 @@ bool ClientSock::createSock(){
     bcopy((char*)server->h_addr, (char*)&serAddr.sin_addr.s_addr, server->h_length);
     //memcpy((char*)serAddr.sin_addr.s_addr , (char*)server->h_addr, server->h_length); //NOTE: s_addr is type unsigned int. dunno how it works tho
     serAddr.sin_port = htons(portNo);
-    while(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
-        ;//testing this
+    if(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
+        return false;//testing this
+
     return true;
 }
 
-//closes current socket and opens a new one
-bool ClientSock::resetSock(){
-    if(sockFd>=0)
-        close(sockFd);
-    if(server)
-        ;//free(server); //???????
-    return createSock();
-}
-
-//generic error message TO BE REWRITTEN
-void ClientSock::error(std::string msg){
-    std::cout << msg << std::endl;
-    exit(1);                            //FORCE QUIT TO BE CHANGED
+bool ClientSock::isConnected(){
+    return connected;
 }
 
 //destructor (pls no mem leaks)
 ClientSock::~ClientSock()
 {
-    if(sockFd)
+    if(sockFd>=0)
         close(sockFd);
     if(server)
-        free(server);
+        ;//free(server);
 }

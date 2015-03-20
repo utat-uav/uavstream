@@ -21,15 +21,17 @@ class ClientSock
         //public functions
         std::string readIn(int);
         void writeOut(std::string);
-        bool resetSock();
+        bool isConnected();
     protected:
     private:
         //private global variables
         int sockFd;
-        std::string serName;
-        int portNo;
         struct sockaddr_in serAddr;
         struct hostent* server;
+
+        bool connected;
+        std::string serName;
+        int portNo;
 
         //private functions
         bool createSock();

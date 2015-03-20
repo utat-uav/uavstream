@@ -1,10 +1,24 @@
 #include "Server.h"
 
-Server::Server(char* ipAddress, int portNo)
+Server::Server(int port_no)
 {
-    std::string temp(ipAddress);
-    server = new ServerSock(temp, portNo);
+    portNo = port_no;
+    newServer();
     testStuff();
+}
+
+void Server::newServer(){
+    do{
+        if(server!=NULL){
+            delete server;
+            server = NULL;
+        }
+        server = new ServerSock(portNo);
+        if(!server->isConnected()){
+            std::cout << "binding failed" << std::endl;
+            usleep(1000000);
+        }
+    }while(!server->isConnected());
 }
 
 void Server::testStuff(){
@@ -17,7 +31,7 @@ void Server::testStuff(){
             server->writeOut("R");
             cliIn = server->readIn(8);
             std::cout << "Response: " << cliIn << std::endl;
-            server->resetSock();
+            newServer();
             std::cout << "Server reset" << std::endl;
         }else if(input == "End"){
             server->writeOut("End");

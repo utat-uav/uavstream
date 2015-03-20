@@ -1,10 +1,25 @@
 #include "Client.h"
 
-Client::Client(char* ipAddress, int portNo)
+Client::Client(std::string ser_name, int port_no)
 {
-    std::string temp(ipAddress);
-    client = new ClientSock(temp, portNo);
+    serName = ser_name;
+    portNo = port_no;
+    newClient();
     testStuff();
+}
+
+void Client::newClient(){
+    do{
+        if(client!=NULL){
+            delete client;
+            client = NULL;
+        }
+        client = new ClientSock(serName, portNo);
+        if(!client->isConnected()){
+            std::cout << "reconnecting..." << std::endl;
+            usleep(1000000);
+        }
+    }while(!client->isConnected());
 }
 
 void Client::testStuff(){
@@ -14,7 +29,7 @@ void Client::testStuff(){
         serIn = client->readIn(BLOCK);
         if(serIn == "R"){
             client->writeOut("RC");
-            client->resetSock();
+            newClient();
             std::cout << "Client reset" << std::endl;
         }else if(serIn == "End"){
             client->writeOut("EndC");

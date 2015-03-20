@@ -15,20 +15,21 @@
 class ServerSock
 {
     public:
-        ServerSock(std::string, int);
+        ServerSock(int);
         virtual ~ServerSock();
 
         //public functions
         std::string readIn(int);
         void writeOut(std::string);
-        bool resetSock();
+        bool isConnected();
     protected:
     private:
         //private global variables
         int sockFd, newsockFd;
-        std::string serName;
-        int portNo;
         struct sockaddr_in serAddr, cliAddr;
+
+        int portNo;
+        bool connected;
 
         //private functions
         bool createSock();
