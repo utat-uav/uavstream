@@ -36,3 +36,40 @@
 	<fstream>
 	<iostream>
 
+1426975095 source:/home/william/git2/uavstream/NewClient/main.cpp
+	<iostream>
+	"Client.h"
+
+1426975095 /home/william/git2/uavstream/NewClient/include/Client.h
+	"ClientSock.h"
+	<string.h>
+	<fstream>
+	<string>
+	<iostream>
+	<unistd.h>
+
+1426975095 /home/william/git2/uavstream/NewClient/include/ClientSock.h
+	<iostream>
+	<cstdlib>
+	<netdb.h>
+	<netinet/in.h>
+	<string>
+	<string.h>
+	<sys/socket.h>
+	<sys/types.h>
+	<unistd.h>
+
+1426975095 source:/home/william/git2/uavstream/NewClient/src/Client.cpp
+	"Client.h"
+
+1426975095 source:/home/william/git2/uavstream/NewClient/src/ClientSock.cpp
+	"ClientSock.h"
+
+1426978460 source:/home/william/git2/uavstream/NewClient/src/ClientFile.cpp
+	"ClientFile.h"
+	<string.h>
+
+1426978059 /home/william/git2/uavstream/NewClient/include/ClientFile.h
+	<fstream>
+	<iostream>
+

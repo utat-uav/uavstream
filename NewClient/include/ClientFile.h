@@ -7,14 +7,18 @@
 class ClientFile
 {
     public:
-        ClientFile(int, std::string);
+        ClientFile(std::string);
         virtual ~ClientFile();
+
         //open, write, close
         void fileOpen(std::string);
-        void fileWrite(std::string);
+        void fileWrite(char*);
+        void fileClose();
     protected:
     private:
-        std::ofstream* file;
+        std::ofstream* fileOut;
+        int block;
+
 };
 
 #endif // CLIENTFILE_H
