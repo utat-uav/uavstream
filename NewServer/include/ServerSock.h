@@ -15,12 +15,14 @@
 class ServerSock
 {
     public:
-        ServerSock(int);
+        ServerSock(int port_number);
         virtual ~ServerSock();
 
         //public functions
         std::string readIn(int);
+        int readIn(char*, int);
         void writeOut(std::string);
+        int writeOut(const char*);
         bool isConnected();
     protected:
     private:

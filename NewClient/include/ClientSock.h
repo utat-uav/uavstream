@@ -15,7 +15,7 @@
 class ClientSock
 {
     public:
-        ClientSock(std::string, int);
+        ClientSock(std::string server_name, int port_number);
         virtual ~ClientSock();
 
         //public functions

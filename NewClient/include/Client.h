@@ -13,7 +13,7 @@
 class Client
 {
     public:
-        Client(std::string, int);
+        Client(std::string server_name, int port_number);
         virtual ~Client();
     protected:
     private:

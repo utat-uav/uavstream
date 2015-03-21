@@ -15,10 +15,19 @@ std::string ServerSock::readIn(int size){
     return re;
 }
 
+int ServerSock::readIn(char* s, int i){
+    memset(s, 0, i);
+    return read(newsockFd, s, i);
+}
+
 //write something
 void ServerSock::writeOut(std::string toWrite){
     const char* c = toWrite.c_str();
     write(newsockFd, c, strlen(c));
+}
+
+int ServerSock::writeOut(const char* toWrite){
+    return write(newsockFd, toWrite, strlen(toWrite));
 }
 
 //open server socket and client socket

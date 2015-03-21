@@ -3,8 +3,9 @@
 Server::Server(int port_no)
 {
     portNo = port_no;
-    newServer();
-    testStuff();
+    //newServer();
+    //testStuff();
+    testFileStuff();
 }
 
 void Server::newServer(){
@@ -16,7 +17,7 @@ void Server::newServer(){
         server = new ServerSock(portNo);
         if(!server->isConnected()){
             std::cout << "binding failed" << std::endl;
-            usleep(1000000);
+            usleep(10000000); //10 seconds
         }
     }while(!server->isConnected());
 }
@@ -44,6 +45,28 @@ void Server::testStuff(){
             cliIn = server->readIn(8);
             std::cout << "Response: " << cliIn << std::endl;
         }
+    }
+}
+
+void Server::newFile(){
+
+}
+
+void Server::testFileStuff(){
+    std::string fPath;
+    std::cout << "File path: ";
+    std::cin >> fPath;
+    char buffer[BLOCK+1];
+    fileIn = new ServerFile(fPath, BLOCK);
+    if(fileIn->isOpen()){
+        for(int c=(int)(fileIn->getSize()/BLOCK);c>0;c--){
+            fileIn->readBlock(buffer);
+            std::cout << buffer;
+        }
+        fileIn->readLast(buffer);
+        std::cout << buffer;
+    }else{
+        std::cout << "file does not exist" << std::endl;
     }
 }
 
