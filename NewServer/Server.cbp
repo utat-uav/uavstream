@@ -25,9 +25,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Server.h" />
+		<Unit filename="include/ServerFile.h" />
 		<Unit filename="include/ServerSock.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Server.cpp" />
+		<Unit filename="src/ServerFile.cpp" />
 		<Unit filename="src/ServerSock.cpp" />
 		<Extensions>
 			<code_completion />

@@ -3,21 +3,22 @@
 	<iostream>
 	"Client.h"
 
-1426880040 source:/home/harry/Desktop/git/uavstream/NewClient/src/Client.cpp
+1427001925 source:/home/harry/Desktop/git/uavstream/NewClient/src/Client.cpp
 	"Client.h"
 
-1426904518 /home/harry/Desktop/git/uavstream/NewClient/include/Client.h
+1427000616 /home/harry/Desktop/git/uavstream/NewClient/include/Client.h
 	"ClientSock.h"
+	"ClientFile.h"
 	<string.h>
 	<fstream>
 	<string>
 	<iostream>
 	<unistd.h>
 
-1426878603 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientSock.cpp
+1427000974 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientSock.cpp
 	"ClientSock.h"
 
-1426904534 /home/harry/Desktop/git/uavstream/NewClient/include/ClientSock.h
+1427000365 /home/harry/Desktop/git/uavstream/NewClient/include/ClientSock.h
 	<iostream>
 	<cstdlib>
 	<netdb.h>
@@ -28,11 +29,11 @@
 	<sys/types.h>
 	<unistd.h>
 
-1426866034 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientFile.cpp
+1427002514 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientFile.cpp
 	"ClientFile.h"
 	<string.h>
 
-1426866034 /home/harry/Desktop/git/uavstream/NewClient/include/ClientFile.h
+1426999660 /home/harry/Desktop/git/uavstream/NewClient/include/ClientFile.h
 	<fstream>
 	<iostream>
 

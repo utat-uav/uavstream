@@ -16,7 +16,7 @@ std::string ServerSock::readIn(int size){
 }
 
 int ServerSock::readIn(char* s, int i){
-    memset(s, 0, i);
+    memset(s, 0, i+1);
     return read(newsockFd, s, i);
 }
 

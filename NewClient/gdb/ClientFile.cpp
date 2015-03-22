@@ -10,7 +10,7 @@ ClientFile::ClientFile(std::string fileName)
 void ClientFile::fileOpen(std::string fName){
     fileOut = new std::ofstream();
     const char* c = fName.c_str();
-    fileOut->open(c, std::ios::binary);
+    fileOut->open(c, std::ios::out|std::ios::binary);
 }
 
 void ClientFile::fileWrite(char* s){

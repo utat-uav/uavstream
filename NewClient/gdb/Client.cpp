@@ -51,21 +51,18 @@ void Client::testFileStuff(){
     unsigned int fSize;
 
     client->readIn(buffer, BLOCK);
-    std::string fName(buffer);
-    std::cout << "read file name: " << fName.substr(0,10) << std::endl;
-    memset(buffer, 0, BLOCK+1);
+    fSize = (unsigned int)atoll(buffer);
     client->readIn(buffer, BLOCK);
-    fSize = (unsigned int)atoi(buffer);
-    std::cout << "read file size: " << buffer << std::endl;
+    std::string fName(buffer);
     fileOut = new ClientFile(fName);
+    std::cout << fSize << " " << fName << std::endl;
     for(int c=(int)(fSize/BLOCK);c>0;c--){
         client->readIn(buffer, BLOCK);
         fileOut->fileWrite(buffer);
-        //std::cout << "read " << buffer << std::endl;
+        std::cout << "wrote " << c << std::endl;
     }
     client->readIn(buffer, (int)(fSize%BLOCK));
     fileOut->fileWrite(buffer);
-    //std::cout << "read " << buffer << std::endl;
 }
 
 Client::~Client()

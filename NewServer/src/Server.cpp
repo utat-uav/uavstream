@@ -3,7 +3,7 @@
 Server::Server(int port_no)
 {
     portNo = port_no;
-    //newServer();
+    newServer();
     //testStuff();
     testFileStuff();
 }
@@ -59,12 +59,20 @@ void Server::testFileStuff(){
     char buffer[BLOCK+1];
     fileIn = new ServerFile(fPath, BLOCK);
     if(fileIn->isOpen()){
+        server->writeOut(fPath.c_str());
+        std:: cout << "wrote file name: " << fPath << std::endl;
+        memset(buffer, 0, BLOCK+1);
+        sprintf(buffer, "%d", (int)fileIn->getSize());
+        server->writeOut(buffer);
+        std::cout << "wrote file size: " << buffer << std::endl;
         for(int c=(int)(fileIn->getSize()/BLOCK);c>0;c--){
             fileIn->readBlock(buffer);
-            std::cout << buffer;
+            server->writeOut(buffer);
+            //std::cout << "wrote " << buffer << std::endl;
         }
         fileIn->readLast(buffer);
-        std::cout << buffer;
+        server->writeOut(buffer);
+        //std::cout << "wrote " << buffer << std::endl;
     }else{
         std::cout << "file does not exist" << std::endl;
     }
