@@ -5,7 +5,7 @@ Client::Client(std::string ser_name, int port_no)
     serName = ser_name;
     portNo = port_no;
 
-    newClient();
+    //newClient();
     //testStuff();
     testFileStuff();
 }
