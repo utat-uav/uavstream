@@ -4,6 +4,12 @@
 ClientFile::ClientFile(std::string fileName)
 {
     //ctor
+    char i = '1';
+    while (isDuplicate(fileName)){
+        std::string temp(i);
+        fileName = fileName.substr(0, fileName.find(".")-1) + temp + fileName.substr(fileName.find("."), fileName.length()-fileName.find("."));
+        i++;
+    }
     fileOpen(fileName);
 }
 
@@ -20,6 +26,18 @@ void ClientFile::fileWrite(char* s){
 
 void ClientFile::fileClose(){
     fileOut->close();
+}
+
+bool ClientFile::isDuplicate(std::string filename){
+    std::ifstream testStream = new std::ifstream(filename.c_str());
+    if (testStream.is_open()){
+        testStream.close();
+        return true;
+    }
+    else{
+        testStream.close();
+        return false;
+    }
 }
 
 ClientFile::~ClientFile()

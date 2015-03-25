@@ -14,6 +14,7 @@ class ClientFile
         void fileOpen(std::string);
         void fileWrite(char*);
         void fileClose();
+        bool isDuplicate(std::string);
     protected:
     private:
         std::ofstream* fileOut;
