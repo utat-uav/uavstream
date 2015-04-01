@@ -2,7 +2,7 @@
 #include <unistd.h>
 Client::Client(std::string ser_name, int port_no)
 {
-    serName = "99.231.118.51";
+    serName = "localhost";
     portNo = port_no;
     newClient();
     //testStuff();

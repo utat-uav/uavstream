@@ -4,9 +4,11 @@ Server::Server(int port_no)
 {
     portNo = port_no;
     newServer();
+    //std::cout << "THIS PIECE OF SHIT DOESN'T WANT TO WORK" << std::endl;
     //testStuff();
     //testFileStuff();
-    sendFile("test1.txt");
+    //sendFile("test1.txt");
+    sendFile("/home/harry/DEW.png");
     //sendFile("/home/harry/SABAH.jpg");
     server->writeOut("E");
 }
@@ -36,49 +38,44 @@ bool Server::sendFile(std::string file_path){
     sendInfo(buffer, BLOCK, 0);
 
     int c;
-    for(c=0;c<(int)(fileIn->getSize()%BLOCK);c++){
+    std::cout << "# to send: " << (int)(fileIn->getSize()/BLOCK) << std::endl;
+    for(c=0;c<(int)(fileIn->getSize()/BLOCK);c++){
         memset(buffer, 0, SIZE);
         fileIn->readBlock(buffer);
-        std::cout << "writing block #" << c << std::endl;
-        std::cout << buffer << std::endl;
-        while(!sendInfo(buffer, BLOCK, c))
-            usleep(5000000);//may need to add a counter to infinite loops
-        if(c<10){
-            std::cout << c << "\b";
-        }else if(c<100){
-            std::cout << c << "\b\b";
-        }else if(c<1000){
-            std::cout << c << "\b\b\b";
-        }else if(c<10000){
-            std::cout << c << "\b\b\b\b";
-        }
-        std::cout << "wrote block #" << c << std::endl;
-        usleep(5000000);
+        //while(!sendInfo(buffer, BLOCK, c))
+            sendInfo(buffer, BLOCK, c);//may need to add a counter to infinite loops
     }
     memset(buffer, 0, SIZE);
     fileIn->readLast(buffer);
-    while(!sendInfo(buffer, BLOCK, c))
-        ;//may need anti infinite loops
+    //while(!sendInfo(buffer, BLOCK, c))
+        sendInfo(buffer,BLOCK,c);//may need anti infinite loops
 
     return true;
 }
 
 bool Server::sendInfo(const char* info, int len, int succ){
     char buffer[SIZE] = {0};
-    if(server->writeOut(info, len)<0){      //send info
+    char infobuffer[SIZE];
+    strncpy(infobuffer, info, BLOCK);
+    infobuffer[BLOCK] = '\0';
+    usleep(10);
+    if(server->writeOut(infobuffer, len)<0){      //send info
         return false;
     }
+    usleep(10);
     if(server->readIn(buffer, len)<0){      //read the info back
         return false;
     }
-    if(!strcmp(buffer, info)==0){           //check sent and read are equivalent
+    if(!strcmp(buffer, infobuffer)==0){           //check sent and read are equivalent
         //std::cout << "wrote: \n" << info << "\nread:\n" << buffer << std::endl;
         sprintf(buffer, "%07d", -1);
         //std::cout << buffer << std::endl;
+        usleep(10);
         server->writeOut(buffer, 7);
         return false;
     }
     sprintf(buffer, "%07d", succ);
+    usleep(10);
     server->writeOut(buffer, 7);
     return true;
 }
