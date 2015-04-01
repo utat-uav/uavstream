@@ -12,13 +12,17 @@ class ClientFile
 
         //open, write, close
         void fileOpen(std::string);
-        void fileWrite(char*);
+        void fileWrite(char*, int len);
         void fileClose();
         bool isDuplicate(std::string);
+        std::string getName();
     protected:
     private:
         std::ofstream* fileOut;
         int block;
+        unsigned int fSize;
+        unsigned int fLeft;
+        std::string fName;
 
 };
 

@@ -31,6 +31,10 @@ int ClientSock::writeOut(const char* toWrite){
     return write(sockFd, toWrite, strlen(toWrite));
 }
 
+int ClientSock::writeOut(const char* toWrite, int len){
+    return write(sockFd, toWrite, len);
+}
+
 //opens and connects a new socket using the same ip and portno
 bool ClientSock::createSock(){
     //create socket
@@ -50,7 +54,7 @@ bool ClientSock::createSock(){
     //memcpy((char*)serAddr.sin_addr.s_addr , (char*)server->h_addr, server->h_length); //NOTE: s_addr is type unsigned int. dunno how it works tho
     serAddr.sin_port = htons(portNo);
     if(connect(sockFd, (struct sockaddr*)&serAddr, sizeof(serAddr))<0)
-        return false;//testing this
+        return false;
 
     return true;
 }

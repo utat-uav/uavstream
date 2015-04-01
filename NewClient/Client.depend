@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1426637011 source:/home/harry/Desktop/git/uavstream/NewClient/main.cpp
+1426866034 source:/home/harry/Desktop/git/uavstream/NewClient/main.cpp
 	<iostream>
 	"Client.h"
 
-1427324815 source:/home/harry/Desktop/git/uavstream/NewClient/src/Client.cpp
+1427863398 source:/home/harry/Desktop/git/uavstream/NewClient/src/Client.cpp
 	"Client.h"
+	<unistd.h>
 
-1427322888 /home/harry/Desktop/git/uavstream/NewClient/include/Client.h
+1427856545 /home/harry/Desktop/git/uavstream/NewClient/include/Client.h
 	"ClientSock.h"
 	"ClientFile.h"
 	<string.h>
@@ -15,10 +16,10 @@
 	<iostream>
 	<unistd.h>
 
-1427322888 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientSock.cpp
+1427856588 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientSock.cpp
 	"ClientSock.h"
 
-1427322888 /home/harry/Desktop/git/uavstream/NewClient/include/ClientSock.h
+1427856606 /home/harry/Desktop/git/uavstream/NewClient/include/ClientSock.h
 	<iostream>
 	<cstdlib>
 	<netdb.h>
@@ -29,11 +30,11 @@
 	<sys/types.h>
 	<unistd.h>
 
-1427002514 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientFile.cpp
+1427857037 source:/home/harry/Desktop/git/uavstream/NewClient/src/ClientFile.cpp
 	"ClientFile.h"
 	<string.h>
 
-1427324426 /home/harry/Desktop/git/uavstream/NewClient/include/ClientFile.h
+1427857021 /home/harry/Desktop/git/uavstream/NewClient/include/ClientFile.h
 	<fstream>
 	<iostream>
 

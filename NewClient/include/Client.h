@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 #define BLOCK 2048
+#define SIZE BLOCK+1
 
 class Client
 {
@@ -24,8 +25,11 @@ class Client
         int portNo;
 
         void newClient();
+        void handleInput();
+        int readInfo(char* info, int length);
+        void recvFile(unsigned int file_size);
+        void newFile(const char* file_path);
         void testStuff();
-        void newFile();
         void testFileStuff();
 };
 

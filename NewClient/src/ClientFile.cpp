@@ -7,10 +7,16 @@ ClientFile::ClientFile(std::string fileName)
     char i = '1';
     while (isDuplicate(fileName)){
         std::string temp(1,i);
-        fileName = fileName.substr(0, fileName.find(".")-1) + temp + fileName.substr(fileName.find("."), fileName.length()-fileName.find("."));
+        int hmm = 0; //1st copy = 0, 2nd copy = 1, 11th copy = 2, 101th copy = 3
+        fileName = fileName.substr(0, fileName.find(".")-hmm) + temp + fileName.substr(fileName.find("."), fileName.length()-fileName.find("."));
         i++;
     }
+    fName = fileName;
     fileOpen(fileName);
+}
+
+std::string ClientFile::getName(){
+    return fName;
 }
 
 void ClientFile::fileOpen(std::string fName){
@@ -19,9 +25,8 @@ void ClientFile::fileOpen(std::string fName){
     fileOut->open(c, std::ios::binary);
 }
 
-void ClientFile::fileWrite(char* s){
-    block = strlen(s);
-    fileOut->write(s,block);
+void ClientFile::fileWrite(char* s, int len){
+    fileOut->write(s, len);
 }
 
 void ClientFile::fileClose(){
@@ -29,7 +34,7 @@ void ClientFile::fileClose(){
 }
 
 bool ClientFile::isDuplicate(std::string filename){
-    std::ifstream testStream = new std::ifstream(filename.c_str());
+    std::ifstream* testStream = new std::ifstream(filename.c_str());
     if (testStream->is_open()){
         testStream->close();
         return true;

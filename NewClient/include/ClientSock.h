@@ -23,6 +23,7 @@ class ClientSock
         int readIn(char*, int);
         void writeOut(std::string);
         int writeOut(const char*);
+        int writeOut(const char* info, int length);
         bool isConnected();
     protected:
     private:
