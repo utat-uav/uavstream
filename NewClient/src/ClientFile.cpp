@@ -4,10 +4,18 @@
 ClientFile::ClientFile(std::string fileName)
 {
     //ctor
-    char i = '1';
+    int i = 1;
     while (isDuplicate(fileName)){
-        std::string temp(1,i);
         int hmm = 0; //1st copy = 0, 2nd copy = 1, 11th copy = 2, 101th copy = 3
+        std::string temp = ""+i;
+        if (i==1)
+            hmm=0;
+        else if (i<11)
+            hmm=1;
+        else if (i<101)
+            hmm=2;
+        else
+            hmm=3;
         fileName = fileName.substr(0, fileName.find(".")-hmm) + temp + fileName.substr(fileName.find("."), fileName.length()-fileName.find("."));
         i++;
     }
