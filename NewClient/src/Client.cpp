@@ -40,9 +40,8 @@ void Client::handleInput(){
             memset(buffer, 0, SIZE);
             readInfo(buffer, BLOCK);    //add handling later
             newFile(buffer);
-            memset(buffer, 0, SIZE);
-            readInfo(buffer, BLOCK);
-            unsigned int fSize = (unsigned int)atoi(buffer);
+            unsigned int fSize = 0;
+            readInfo((char*)&fSize, sizeof(unsigned int));   //change to unsigned long long later
             std::cout << "name: " << fileOut->getName() << std::endl << "size: " << fSize << std::endl;
             recvFile(fSize);            //attempt retrieval
         }else if(serIn == "E"){
@@ -73,11 +72,11 @@ int Client::readInfo(char* info, int len){
     return atoi(buffer);
 }
 
-void Client::recvFile(unsigned int fSize){
+void Client::recvFile(unsigned int fLeft){
     char buffer[SIZE];
     int temp, c;
-    std::cout << "# to recv: " << (int)(fSize/BLOCK) << std::endl;
-    for(c=0;c<(int)(fSize/BLOCK);c++){
+    std::cout << "size: " << fLeft << std::endl;
+    for(c=0;fLeft > BLOCK;fLeft -= BLOCK){
         //do{
             memset(buffer, 0, SIZE);
             temp = readInfo(buffer, BLOCK);
@@ -88,17 +87,12 @@ void Client::recvFile(unsigned int fSize){
             //std::cout << "WARNING: SERVER SENT " << temp << " BUT CLIENT IS WRITING " << c <<std::endl;
             //c = temp;
         //}
-        fileOut->fileWrite(buffer, BLOCK);
+            fileOut->fileWrite(buffer, BLOCK);
+        c++;
     }
-    //do{
-        memset(buffer, 0, SIZE);
-        temp = readInfo(buffer, BLOCK);
-    //}while(temp < 0);
-    //if(c!=temp){
-        //std::cout << "WARNING: SERVER SENT LAST PACKAGE BUT CLIENT IS " << c-temp << " BEHIND" << std::endl;
-    //}
-    temp = (int)(fSize%BLOCK);
-    fileOut->fileWrite(buffer, temp);
+    memset(buffer, 0, SIZE);
+    temp = readInfo(buffer, BLOCK);
+    fileOut->fileWrite(buffer, (int)fLeft);
 }
 
 void Client::testStuff(){

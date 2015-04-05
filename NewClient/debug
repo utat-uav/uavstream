@@ -1,0 +1,13 @@
+#!/bin/bash
+cp main.cpp gdb
+cp src/Client.cpp gdb
+cp include/Client.h gdb
+cp src/ClientSock.cpp gdb
+cp include/ClientSock.h gdb
+cp src/ClientFile.cpp gdb
+cp include/ClientFile.h gdb
+echo "compiling"
+g++ gdb/*.cpp -o gdb/test -g
+echo "opening gdb"
+gdb gdb/test
+

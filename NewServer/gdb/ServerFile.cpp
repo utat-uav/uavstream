@@ -15,7 +15,7 @@ ServerFile::ServerFile(std::string file_path, int block_size)
 
 void ServerFile::readBlock(char* s){
     memset(s, 0, block+1);
-    fileIn->read(s, block);
+    fileIn->read(s, ((unsigned int)block>fLeft)?block:fLeft);
     fLeft -= (unsigned int)block;
 }
 
@@ -38,7 +38,7 @@ unsigned int ServerFile::getSize(){
 }
 
 bool ServerFile::isOpen(){
-    return fileIn->is_open();
+    return fileIn->is_open()&&fLeft>0;
 }
 
 ServerFile::~ServerFile()
