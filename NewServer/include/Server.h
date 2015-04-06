@@ -26,6 +26,7 @@ class Server
 
         bool sendInfo(const char* info, int length, int successful);
         void newServer();
+        void copystr(char* copy_into, const char* copy_from, int length);
         void testStuff();
         void newFile();
         void testFileStuff();

@@ -38,14 +38,13 @@ bool Server::sendFile(std::string file_path){
     sendInfo(fileIn->getName().c_str(), BLOCK, 0);      //add handling later
 
     int c;
-    for(c=0;fLeft >= BLOCK*2;fLeft-=BLOCK){
+    for(c=0;fLeft >= SIZE;fLeft-=BLOCK){
         fileIn->readBlock(buffer);
         sendInfo(buffer, BLOCK, c);
         c++;
     }
-    char buffer2[BLOCK*2+1] = {'\0'};
-    fileIn->readLast(buffer2);
-    sendInfo(buffer2, BLOCK*2, c);
+    fileIn->readLast(buffer);
+    sendInfo(buffer, SIZE, c);
     return true;
 }
 
@@ -53,7 +52,7 @@ bool Server::sendInfo(const char* info, int len, int succ){
     char buffer[SIZE] = {0};
     char infobuffer[SIZE];
     strncpy(infobuffer, info, BLOCK);
-    infobuffer[BLOCK] = '\0';
+    infobuffer[len] = '\0';
     if(server->writeOut(infobuffer, len)<0){      //send info
         return false;
     }

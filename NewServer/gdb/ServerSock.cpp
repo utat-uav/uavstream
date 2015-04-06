@@ -58,10 +58,10 @@ bool ServerSock::createSock(){
 
 bool ServerSock::isConnected(){
     char buffer[8] = "T";
-    if(!writeOut(buffer, 8)){
+    if(writeOut(buffer, 8)<0){
         return (connected=false);
     }
-    if(!readIn(buffer, 8)){
+    if(readIn(buffer, 8)<0){
         return (connected=false);
     }
     if(!buffer[0] == 't'){

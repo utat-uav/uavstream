@@ -61,7 +61,7 @@ int Client::readInfo(char* info, int len){
     if(client->writeOut(buffer, len)<0){    //write the info back
         return -1;
     }
-    strcpy(info, buffer);
+    copystr(info, buffer, len);
     if(client->readIn(buffer, 7)<0){         //check success/fail
         return -1;
     }
@@ -72,7 +72,7 @@ void Client::recvFile(unsigned int fLeft){
     char buffer[SIZE];
     int temp, c;
     std::cout << "size: " << fLeft << std::endl;
-    for(c=0;fLeft >= BLOCK*2;fLeft -= BLOCK){
+    for(c=0;fLeft >= SIZE;fLeft -= BLOCK){
         //do{
             temp = readInfo(buffer, BLOCK);
         //}while(temp < 0);
@@ -85,9 +85,14 @@ void Client::recvFile(unsigned int fLeft){
             fileOut->fileWrite(buffer, BLOCK);
         c++;
     }
-    char buffer2[BLOCK*2+1] = {'\0'};
-    temp = readInfo(buffer2, BLOCK*2);
-    fileOut->fileWrite(buffer2, (int)fLeft);
+    temp = readInfo(buffer, SIZE);
+    fileOut->fileWrite(buffer, (int)fLeft);
+}
+
+void Client::copystr(char* newptr, const char* oldptr, int len){
+    while((len--)>0){
+        *(newptr++)=*(oldptr++);
+    }
 }
 
 void Client::testStuff(){

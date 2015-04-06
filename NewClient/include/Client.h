@@ -26,6 +26,7 @@ class Client
 
         void newClient();
         void handleInput();
+        void copystr(char* copy_into, const char* copy_from, int length);
         int readInfo(char* info, int length);
         void recvFile(unsigned int file_size);
         void newFile(const char* file_path);

@@ -9,8 +9,8 @@
 #include <iostream> //to be removed
 #include <unistd.h>
 
-#define BLOCK 2048
-#define SIZE BLOCK+1
+#define SIZE 2048
+#define BLOCK SIZE/2
 
 class Client
 {
@@ -26,6 +26,7 @@ class Client
 
         void newClient();
         void handleInput();
+        void copystr(char* copy_into, const char* copy_from, int length);
         int readInfo(char* info, int length);
         void recvFile(unsigned int file_size);
         void newFile(const char* file_path);

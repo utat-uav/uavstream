@@ -51,7 +51,7 @@ bool Server::sendFile(std::string file_path){
 bool Server::sendInfo(const char* info, int len, int succ){
     char buffer[SIZE] = {0};
     char infobuffer[SIZE];
-    strncpy(infobuffer, info, BLOCK);
+    copystr(infobuffer, info, len);
     infobuffer[len] = '\0';
     if(server->writeOut(infobuffer, len)<0){      //send info
         return false;
@@ -85,6 +85,12 @@ void Server::newServer(){
             usleep(10000000); //10 seconds
         }
     }while(!server->isConnected());
+}
+
+void Server::copystr(char* newptr, const char* oldptr, int len){
+    while((len--)>0){
+        *(newptr++)=*(oldptr++);
+    }
 }
 
 void Server::testStuff(){

@@ -1,7 +1,7 @@
 #include "Client.h"
 Client::Client(std::string ser_name, int port_no)
 {
-    serName = "localhost";
+    serName = "99.231.118.51";
     portNo = port_no;
     newClient();
     //testStuff();
@@ -61,7 +61,7 @@ int Client::readInfo(char* info, int len){
     if(client->writeOut(buffer, len)<0){    //write the info back
         return -1;
     }
-    strcpy(info, buffer);
+    copystr(info, buffer, len);
     if(client->readIn(buffer, 7)<0){         //check success/fail
         return -1;
     }
@@ -87,6 +87,12 @@ void Client::recvFile(unsigned int fLeft){
     }
     temp = readInfo(buffer, SIZE);
     fileOut->fileWrite(buffer, (int)fLeft);
+}
+
+void Client::copystr(char* newptr, const char* oldptr, int len){
+    while((len--)>0){
+        *(newptr++)=*(oldptr++);
+    }
 }
 
 void Client::testStuff(){
