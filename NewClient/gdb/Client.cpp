@@ -1,5 +1,4 @@
 #include "Client.h"
-#include <unistd.h>
 Client::Client(std::string ser_name, int port_no)
 {
     serName = "localhost";
@@ -37,11 +36,11 @@ void Client::handleInput(){
             newClient();
         }else if(serIn == "F"){         //ready new file
             client->writeOut("f");
+            unsigned int fSize = 0;
+            readInfo((char*)&fSize, sizeof(unsigned int));   //change to unsigned long long later
             memset(buffer, 0, SIZE);
             readInfo(buffer, BLOCK);    //add handling later
             newFile(buffer);
-            unsigned int fSize = 0;
-            readInfo((char*)&fSize, sizeof(unsigned int));   //change to unsigned long long later
             std::cout << "name: " << fileOut->getName() << std::endl << "size: " << fSize << std::endl;
             recvFile(fSize);            //attempt retrieval
         }else if(serIn == "E"){
@@ -56,16 +55,13 @@ void Client::handleInput(){
 
 int Client::readInfo(char* info, int len){
     char buffer[SIZE] = {0};
-    usleep(10);
     if(client->readIn(buffer, len)<0){      //read info
         return -1;
     }
-    usleep(10);
     if(client->writeOut(buffer, len)<0){    //write the info back
         return -1;
     }
     strcpy(info, buffer);
-    usleep(10);
     if(client->readIn(buffer, 7)<0){         //check success/fail
         return -1;
     }
@@ -76,9 +72,8 @@ void Client::recvFile(unsigned int fLeft){
     char buffer[SIZE];
     int temp, c;
     std::cout << "size: " << fLeft << std::endl;
-    for(c=0;fLeft > BLOCK;fLeft -= BLOCK){
+    for(c=0;fLeft >= BLOCK*2;fLeft -= BLOCK){
         //do{
-            memset(buffer, 0, SIZE);
             temp = readInfo(buffer, BLOCK);
         //}while(temp < 0);
         //std::cout << "received block #" << temp << std::endl; //
@@ -90,9 +85,9 @@ void Client::recvFile(unsigned int fLeft){
             fileOut->fileWrite(buffer, BLOCK);
         c++;
     }
-    memset(buffer, 0, SIZE);
-    temp = readInfo(buffer, BLOCK);
-    fileOut->fileWrite(buffer, (int)fLeft);
+    char buffer2[BLOCK*2+1] = {'\0'};
+    temp = readInfo(buffer2, BLOCK*2);
+    fileOut->fileWrite(buffer2, (int)fLeft);
 }
 
 void Client::testStuff(){

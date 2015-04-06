@@ -15,7 +15,7 @@ ServerFile::ServerFile(std::string file_path, int block_size)
 
 void ServerFile::readBlock(char* s){
     memset(s, 0, block+1);
-    fileIn->read(s, ((unsigned int)block>fLeft)?block:fLeft);
+    fileIn->read(s, block);
     fLeft -= (unsigned int)block;
 }
 

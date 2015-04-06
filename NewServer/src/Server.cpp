@@ -33,21 +33,18 @@ bool Server::sendFile(std::string file_path){
     char buffer[SIZE] = {0};
     server->writeOut("F", 1);
     server->readIn(buffer, 1);
-    sendInfo(fileIn->getName().c_str(), BLOCK, 0);      //add handling later
     unsigned int fLeft = fileIn->getSize();
     sendInfo((char*)&fLeft, sizeof(unsigned int), 0);    //change to unsigned long long
+    sendInfo(fileIn->getName().c_str(), BLOCK, 0);      //add handling later
 
     int c;
-    for(c=0;fLeft > BLOCK;fLeft-=BLOCK){
-        memset(buffer, 0, SIZE);
+    for(c=0;fLeft >= SIZE;fLeft-=BLOCK){
         fileIn->readBlock(buffer);
         sendInfo(buffer, BLOCK, c);
         c++;
-        std::cout << c << " ";
     }
-    memset(buffer, 0, SIZE);
-    fileIn->readBlock(buffer);
-    sendInfo(buffer, BLOCK, c);
+    fileIn->readLast(buffer);
+    sendInfo(buffer, SIZE, c);
     return true;
 }
 
@@ -55,7 +52,7 @@ bool Server::sendInfo(const char* info, int len, int succ){
     char buffer[SIZE] = {0};
     char infobuffer[SIZE];
     strncpy(infobuffer, info, BLOCK);
-    infobuffer[BLOCK] = '\0';
+    infobuffer[len] = '\0';
     if(server->writeOut(infobuffer, len)<0){      //send info
         return false;
     }
@@ -64,14 +61,15 @@ bool Server::sendInfo(const char* info, int len, int succ){
     }
     if(!strcmp(buffer, infobuffer)==0){           //check sent and read are equivalent
         //std::cout << "wrote: \n" << info << "\nread:\n" << buffer << std::endl;
-        sprintf(buffer, "%07d", -1);
+        //sprintf(buffer, "%07d", -1);
         //std::cout << buffer << std::endl;
-        server->writeOut(buffer, 7);
-        std::cout << "mismatch " << std::endl;
+        //server->writeOut(buffer, 7);
+        std::cout << "mismatch " << succ << std::endl;
+        succ = -1;
+        server->writeOut((char*)&succ, sizeof(int));
         return false;
     }
-    sprintf(buffer, "%07d", succ);
-    server->writeOut(buffer, 7);
+    server->writeOut((char*)&succ, sizeof(int));
     return true;
 }
 

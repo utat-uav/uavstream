@@ -9,8 +9,8 @@
 #include <string>
 #include <iostream> //to be removed
 
-#define BLOCK 2048
-#define SIZE BLOCK+1
+#define SIZE 2048
+#define BLOCK SIZE/2
 
 class Server
 {
