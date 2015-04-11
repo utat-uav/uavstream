@@ -1,5 +1,6 @@
 #include "ClientFile.h"
 #include <string.h>
+#include <sstream>
 
 ClientFile::ClientFile(std::string fileName)
 {
@@ -7,7 +8,9 @@ ClientFile::ClientFile(std::string fileName)
     int i = 1;
     while (isDuplicate(fileName)){
         int hmm = 0; //1st copy = 0, 2nd copy = 1, 11th copy = 2, 101th copy = 3
-        std::string temp = ""+i;
+        std::stringstream s;
+        s << i;
+        std::string temp = s.str();
         if (i==1)
             hmm=0;
         else if (i<11)
