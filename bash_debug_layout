@@ -10,4 +10,5 @@ echo "compiling"
 g++ gdb/*.cpp -o gdb/test -g
 echo "opening gdb"
 gdb gdb/test
-
+echo "deleting debug file"
+rm gdb/test
