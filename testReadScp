@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Enter odroid address: "
+read addr
+echo "Enter file location (on local): "
+read LOCAL
+echo "Enter file location (on odroid): "
+read REMOTE
+scp $LOCAL odroid@$addr:$REMOTE
