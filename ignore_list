@@ -1,0 +1,6 @@
+ignore_list
+4913
+^[.]
+[.]swp$
+[.]swx$
+index.lock

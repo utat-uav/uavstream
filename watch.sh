@@ -1,8 +1,12 @@
 ADDR=$1
-echo "Sending to: $ADDR"
+
 while true
 do
-	FILE=`inotifywait ./ -e CLOSE_WRITE 2> /dev/null | grep -oE '[^ ]+$'`
-	echo "Attempting to send file: $FILE"
-	scp $FILE $ADDR:~/commsTests
+	file=`inotifywait ./ -r -e CLOSE_WRITE 2> /dev/null | grep -oE '[^ ]+$'`
+	echo "Detected $file changed."
+	if echo "$file" | grep -v -q -f "ignore_list"
+	then
+		echo "Copying $file to $REMOTE$file..."
+		scp $file $ADDR:~/commsTests
+	fi
 done
