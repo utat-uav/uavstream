@@ -1,3 +1,4 @@
+#!/bin/sh
 ADDR=$1
 
 while true
