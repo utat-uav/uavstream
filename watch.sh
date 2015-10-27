@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The destination directory
-REMOTE="heungwes@remote.ecf.utoronto.ca:~/Desktop/"
+REMOTE=$1
 # The directory to watch
 WATCH_PATH="./"
 # A file containing a list of regexes for files to ignore

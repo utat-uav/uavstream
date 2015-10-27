@@ -2,4 +2,6 @@ ignore_list
 watch.sh
 4913
 ^[.].*
+[.]swp$
+[.]swx$
 index.lock
